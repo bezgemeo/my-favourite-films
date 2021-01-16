@@ -1,0 +1,13 @@
+h1 {
+  padding-top: 30px;
+}
+
+.current {
+  color: tomato;
+  transition: color .3s;
+
+  &:hover {
+    color: darken(tomato, 25%);
+  }
+}
+

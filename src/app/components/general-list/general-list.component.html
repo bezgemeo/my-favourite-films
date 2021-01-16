@@ -1,0 +1,15 @@
+
+<div *ngIf="filmsList">films list:
+<pre>
+<code>
+  {{filmsList | json}}
+</code>
+</pre>
+</div>
+<div *ngIf="error">error:
+  <pre>
+    <code>
+      {{error | json}}
+    </code>
+  </pre>
+</div>

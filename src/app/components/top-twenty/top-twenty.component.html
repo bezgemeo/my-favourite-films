@@ -1,0 +1,14 @@
+<div>
+  <div class="film-list-item" *ngFor="let film of topFilmsList">
+    <app-film-card
+      [idIMDB]="film.idIMDB"
+      [poster]="film.urlPoster"
+      [title]="film.title"
+      [year]="film.year"
+      [rating]="film.rating"
+      [countries]="film.countries"
+      [directors]="film.directors"
+      [trailerQualitiesList]="film.trailers"
+    ></app-film-card>
+  </div>
+</div>

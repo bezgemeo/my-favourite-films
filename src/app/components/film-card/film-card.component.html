@@ -1,0 +1,51 @@
+<div class="film-card" [id]="idIMDB">
+  <div class="film-poster">
+    <img [src]="poster" [alt]="title">
+  </div>
+  <div class="film-info">
+    <h3 class="film-info__title">{{title}}</h3>
+    <p>Year: {{year}}</p>
+    <p>Rating: {{rating}}</p>
+    <p>
+      Countries:
+      <span *ngFor="let country of countries">
+        {{country}}
+      </span>
+    </p>
+    <p class="film-info__links">
+      Directors:
+      <ng-container *ngFor="let director of directors; let $index = last;">
+        <a href="https://www.imdb.com/name/{{director.id}}/"
+           rel="noopener noreferrer"
+           target="_blank">
+          {{director.name}}
+        </a>{{$index ? '' : ','}}
+      </ng-container>
+    </p>
+    <div class="film-info-trailer" *ngIf="trailerQualitiesList">
+      <span>Watch trailer</span>
+      <app-button *ngFor="let trailer of trailerQualitiesList; let $index = index"
+                  cssClass="button"
+                  [buttonCaption]="trailer.quality.toString()"
+                  (click)="chooseQuality(trailerQualitiesList[$index].videoURL)"
+      ></app-button>
+    </div>
+    <div class="film-info-favorite">
+      <app-button
+        [cssClass]="favourite ? 'button button-success' : 'button button-alert'"
+        [buttonCaption]="favourite ? 'Your favourite &#9733;' : 'Add to favourites &#9734;'"
+        (click)="toggleFavourite(idIMDB)"
+      ></app-button>
+    </div>
+  </div>
+</div>
+
+<app-modal-window [showModal]="modalShown">
+  <ng-container *ngIf="modalContent" [ngTemplateOutlet]="modalContent"></ng-container>
+</app-modal-window>
+
+<ng-template #modalContent>
+  <div class="film-trailer">
+    <video [src]="chosenQuality" controls></video>
+  </div>
+</ng-template>

@@ -1,0 +1,47 @@
+.film {
+  &-card {
+    display: flex;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: lightgoldenrodyellow;
+    border-radius: 8px;
+  }
+
+  &-poster {
+    width: 182px;
+    margin-right: 20px;
+    flex-shrink: 0;
+  }
+
+  &-info {
+    p {
+      margin-bottom: 5px;
+    }
+
+    &__title {
+      margin-bottom: 8px;
+    }
+
+    &__links a {
+      color: tomato;
+      transition: color .3s;
+      margin-left: 0;
+
+      &:hover {
+        color: darken(tomato, 30%);
+      }
+    }
+  }
+
+  &-trailer {
+    video {
+      display: block;
+      object-fit: fill;
+      outline: none;
+      width: auto;
+      height: auto;
+    }
+  }
+}
+
+
