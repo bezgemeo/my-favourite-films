@@ -1,14 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
+import {ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FilmCardComponent } from './components/film-card/film-card.component';
 import { GeneralListComponent } from './components/general-list/general-list.component';
 import { TopTwentyComponent } from './components/top-twenty/top-twenty.component';
-import { ButtonComponent } from './components/button/button.component';
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
+import { FavouriteDetailsComponent } from './components/favourite-details/favourite-details.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,14 @@ import { ModalWindowComponent } from './components/modal-window/modal-window.com
     FilmCardComponent,
     GeneralListComponent,
     TopTwentyComponent,
-    ButtonComponent,
-    ModalWindowComponent
+    ModalWindowComponent,
+    FavouriteDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

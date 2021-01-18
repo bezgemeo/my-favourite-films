@@ -1,7 +1,7 @@
-<div class="modal" *ngIf="showModal">
+<div class="modal" *ngIf="modalShown">
   <div class="modal-body">
     <button class="modal-close"
-    (click)="showModal = !showModal"
+    (click)="closeModal();"
     ></button>
     <ng-content></ng-content>
   </div>

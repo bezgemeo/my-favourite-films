@@ -1,15 +1,6 @@
-
-<div *ngIf="filmsList">films list:
-<pre>
-<code>
-  {{filmsList | json}}
-</code>
-</pre>
-</div>
-<div *ngIf="error">error:
-  <pre>
-    <code>
-      {{error | json}}
-    </code>
-  </pre>
+<div>
+  <h2>{{title}}</h2>
+  <p>Welcome to "My Favourite Films" web app!</p>
+  <p>Unfortunately, due to lack of information about routes the app should have, this route exists just for presentational purposes.</p>
+  <p>Please, visit <a routerLink="/top-20">Top 20 films</a> page to see top 20 films list according to IMDB.</p>
 </div>

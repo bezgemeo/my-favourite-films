@@ -1,0 +1,48 @@
+<div class="favourite-content">
+  <form
+    [formGroup]="favouriteFilmForm"
+    class="favourite-form"
+    id="favourite-form">
+    <label class="favourite-label">
+      Film name:
+      <input type="text" formControlName="incomingFilmName" class="favourite-input">
+    </label>
+    <label class="favourite-label">
+      Have You watched it?
+      <select formControlName="watched" class="favourite-input" (change)="setValidatorToInputData()">
+        <option value="no">I want to watch</option>
+        <option value="yes">I've already watched</option>
+      </select>
+    </label>
+    <div *ngIf="favouriteFilmForm.value.watched === 'no'">
+      <label class="favourite-label">
+        When you want to watch?
+        <input formControlName="dateToWatch" type="date" class="favourite-input">
+      </label>
+      <label class="favourite-label favourite-label_inline">
+        Remember me
+        <input formControlName="remember" [checked]="remember" type="checkbox" class="favourite-hidden-checkbox">
+        <span class="favourite-visible-checkbox">
+        </span>
+      </label>
+    </div>
+    <div *ngIf="favouriteFilmForm.value.watched === 'yes'">
+      <label class="favourite-label">
+        Your review
+        <textarea formControlName="review" class="favourite-input"></textarea>
+      </label>
+    </div>
+    <div class="favourite-form__submit">
+      <button
+        type="button"
+        [disabled]="!favouriteFilmForm.valid"
+        [classList]="!favouriteFilmForm.valid ? 'button button-alert' : 'button button-success'"
+        (click)="sendData()"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+  <div>{{favouriteFilmForm.value | json}}</div>
+</div>
+

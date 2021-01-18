@@ -1,9 +1,11 @@
 <div class="film-card" [id]="idIMDB">
   <div class="film-poster">
-    <img [src]="poster" [alt]="title">
+    <img [src]="poster" [alt]="title" [title]="title">
   </div>
   <div class="film-info">
-    <h3 class="film-info__title">{{title}}</h3>
+    <h3 class="film-info__title">
+      {{title}}
+    </h3>
     <p>Year: {{year}}</p>
     <p>Rating: {{rating}}</p>
     <p>
@@ -24,28 +26,51 @@
     </p>
     <div class="film-info-trailer" *ngIf="trailerQualitiesList">
       <span>Watch trailer</span>
-      <app-button *ngFor="let trailer of trailerQualitiesList; let $index = index"
-                  cssClass="button"
-                  [buttonCaption]="trailer.quality.toString()"
+      <button *ngFor="let trailer of trailerQualitiesList; let $index = index"
+                  class="button"
                   (click)="chooseQuality(trailerQualitiesList[$index].videoURL)"
-      ></app-button>
+      >
+        {{trailer.quality.toString()}}
+      </button>
     </div>
-    <div class="film-info-favorite">
-      <app-button
-        [cssClass]="favourite ? 'button button-success' : 'button button-alert'"
-        [buttonCaption]="favourite ? 'Your favourite &#9733;' : 'Add to favourites &#9734;'"
-        (click)="toggleFavourite(idIMDB)"
-      ></app-button>
+    <div class="film-info-favourite">
+      <button
+        [classList]="addedToFavourite ? 'button button-success' : 'button button-alert'"
+        (click)="showForm();"
+      >
+        {{addedToFavourite ? 'Your favourite' : 'Add to favourites'}}
+      </button>
     </div>
   </div>
 </div>
 
-<app-modal-window [showModal]="modalShown">
-  <ng-container *ngIf="modalContent" [ngTemplateOutlet]="modalContent"></ng-container>
+<app-modal-window
+  [modalShown]="trailerModalShown"
+  (modalClosed)="clearChosenQuality()"
+>
+  <ng-container [ngTemplateOutlet]="trailerContent"></ng-container>
 </app-modal-window>
 
-<ng-template #modalContent>
+<ng-template #trailerContent>
   <div class="film-trailer">
     <video [src]="chosenQuality" controls></video>
   </div>
+</ng-template>
+
+<app-modal-window [modalShown]="favouriteModalShown" (modalClosed)="favouriteModalShown = false">
+  <ng-container [ngTemplateOutlet]="favouriteContent"></ng-container>
+</app-modal-window>
+
+<ng-template #favouriteContent>
+  <app-favourite-details
+    *ngIf="favouriteModalShown"
+    [filmID]="idIMDB"
+    [incomingFilmName]="title"
+    [watched]="watched"
+    [dateToWatch]="dateToWatch"
+    [remember]="remember"
+    [review]="review"
+    [addedToFav]="addedToFavourite"
+    (submitForm)="editFavourite($event)"
+  ></app-favourite-details>
 </ng-template>

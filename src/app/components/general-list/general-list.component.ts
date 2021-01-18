@@ -8,26 +8,11 @@ import {Observable, of} from 'rxjs';
   templateUrl: './general-list.component.html',
   styleUrls: ['./general-list.component.scss']
 })
-export class GeneralListComponent implements OnInit, OnDestroy {
+export class GeneralListComponent {
 
-  constructor(public filmService: FilmService) {
+  constructor() {
   }
+  public title = 'Welcome!';
 
-  public filmsList: IFilm[] | undefined;
-  public error: any;
 
-  ngOnInit(): void {
-    this.getFilms();
-  }
-
-  ngOnDestroy(): void {
-    console.log('destroyed');
-  }
-
-  getFilms(): Observable<IFilm[] | undefined> {
-    this.filmService.getFilms().subscribe(
-      filmsList => this.filmsList = filmsList.data.movies,
-      error => this.error = error);
-    return of(this.filmsList);
-  }
 }

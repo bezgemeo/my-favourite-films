@@ -1,27 +1,24 @@
-import {Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, Input, Output, TemplateRef, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-modal-window',
   templateUrl: './modal-window.component.html',
   styleUrls: ['./modal-window.component.scss']
 })
-export class ModalWindowComponent implements OnInit {
+export class ModalWindowComponent {
   @Input()
-  public showModal = false;
-  @Input()
-  public videoSrc?: string;
-  @Input()
-  public qualities?: Array<{
-    quality: string;
-    videoURL: string;
-  }>;
+  public modalShown = false;
   @Input()
   public content?: TemplateRef<any>;
+
+  @Output()
+  public modalClosed = new EventEmitter();
 
   constructor() {
   }
 
-  ngOnInit(): void {
+  public closeModal(): void {
+    this.modalShown = !this.modalShown;
+    this.modalClosed.emit();
   }
-
 }

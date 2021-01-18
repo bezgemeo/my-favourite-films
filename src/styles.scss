@@ -24,7 +24,7 @@ nav {
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: #29cf72;
   display: inline-block;
   margin-left: 10px;
   transition: color .3s;
@@ -34,7 +34,7 @@ a {
   }
 
   &:hover {
-    color: lighten(#000, 40%);
+    color: darken(#29cf72, 10%);
   }
 }
 
@@ -44,10 +44,60 @@ a {
   padding: 0 15px;
 }
 
+.button {
+  display: inline-block;
+  padding: 10px;
+  background-color: transparent;
+  border-radius: 4px;
+  font-size: inherit;
+  outline: none;
+  border: 2px solid tomato;
+  transition: background-color .3s, border-color .3s;
+  cursor: pointer;
+  margin-bottom: 5px;
+
+  &[disabled]{
+    opacity: .7;
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    background-color: tomato;
+  }
+
+  &-alert {
+    border-color: red;
+
+    &[disabled]{
+      background-color: rgba(red, .5);
+      color: black;
+    }
+
+    &:hover {
+      background-color: red;
+    }
+  }
+
+  &-success {
+    border-color: lightgreen;
+    background-color: lightgreen;
+
+    &:hover {
+      border-color: darken(lightgreen, 20%);
+      background-color: darken(lightgreen, 20%);
+    }
+  }
+}
+
+
 .film-card {
   background-color: blue;
 
-  .button{
+  .button {
     margin-left: 10px;
+
+    &:first-child {
+      margin-left: 0;
+    }
   }
 }

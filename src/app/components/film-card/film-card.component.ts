@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class FilmCardComponent implements OnInit {
 
   @Input()
-  public idIMDB?: string;
+  public idIMDB = '';
   @Input()
   public poster?: string;
   @Input()
@@ -21,49 +21,67 @@ export class FilmCardComponent implements OnInit {
   public countries?: string[];
   @Input()
   public directors?: Array<{ id: string; name: string; }>;
-  public favourite = false;
-  public fieldName = 'favouriteFilms';
-  public modalShown = false;
+
   @Input()
   public trailerQualitiesList?: any;
-  public chosenQuality = '';
+  public chosenQuality?: string;
 
-  constructor() {}
+  public addedToFavourite = false;
+
+  public trailerModalShown = false;
+  public favouriteModalShown = false;
+  public watched = false;
+  public dateToWatch = null;
+  public remember = false;
+  public review = '';
+
+  constructor() {
+  }
 
   ngOnInit(): void {
-    this.checkFavourite(this.idIMDB);
+    this.addedToFavourite = this.checkFavourite();
+    this.fillFromStorage();
   }
 
-  public toggleFavourite(id: string): void {
+  public showForm(): void {
+    this.favouriteModalShown = true;
+  }
+
+  public editFavourite(event: Event): void {
     const LS = window.localStorage;
+    LS.setItem(this.idIMDB, JSON.stringify(event) as string);
+    this.fillFromStorage();
+    this.addedToFavourite = true;
+    this.favouriteModalShown = false;
+  }
 
-    if (!LS.getItem(this.fieldName)) {
-      LS.setItem(this.fieldName, JSON.stringify([id]));
-    } else {
-      const filmsIdArray = JSON.parse(LS.getItem(this.fieldName) as string);
-      if (!filmsIdArray.includes(id)) {
-        filmsIdArray.push(id);
-      } else {
-        filmsIdArray.splice(filmsIdArray.indexOf(id), 1);
-      }
-      LS.setItem(this.fieldName, JSON.stringify(filmsIdArray));
-      this.checkFavourite(id);
+  public fillFromStorage(): void {
+    if (this.checkFavourite()) {
+      const data = JSON.parse(window.localStorage.getItem(this.idIMDB) as string);
+      this.watched = data.watched;
+      this.dateToWatch = data.dateToWatch;
+      this.remember = data.remember;
+      this.review = data.review;
     }
   }
 
-  public checkFavourite(id: string | undefined): void {
-    if (id !== undefined) {
-      const filmsArray = JSON.parse(window.localStorage.getItem(this.fieldName) as string);
-      this.favourite = filmsArray.includes(id);
-    }
+  public checkFavourite(): boolean {
+    return !!window.localStorage.getItem(this.idIMDB);
   }
 
   public openModalWithTrailer(): void {
-    this.modalShown = true;
+    this.trailerModalShown = true;
+  }
+
+  public clearChosenQuality(): void {
+    if (this.trailerModalShown) {
+      this.chosenQuality = '';
+      this.trailerModalShown = false;
+    }
   }
 
   public chooseQuality(quality: string): void {
-    this.chosenQuality = quality;
     this.openModalWithTrailer();
+    this.chosenQuality = quality;
   }
 }

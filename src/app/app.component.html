@@ -1,11 +1,8 @@
 <div class="container">
-  <h1>
-    <a routerLink="/general-list" title="Home">{{title}}</a>
-  </h1>
+  <h1>{{title}}</h1>
   <nav>
     <a routerLink="/general-list" [class.current]="routeIsActive('/general-list')">General list</a>
     <a routerLink="/top-20" [class.current]="routeIsActive('/top-20')">Top 20 films</a>
   </nav>
   <router-outlet></router-outlet>
-
 </div>

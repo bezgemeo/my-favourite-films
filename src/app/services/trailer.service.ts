@@ -13,10 +13,9 @@ export class TrailerService {
   constructor(private http: HttpClient) {
   }
 
-  // todo: add request to local storage if there is an error
   getTrailer(filmId: string): Observable<any> {
     return this.http.get(
-      `https://www.myapifilms.com/imdb/idIMDB?idIMDB=${filmId}&token=${token2}&format=json&language=en-us&trailers=1`
+      `https://www.myapifilms.com/imdb/idIMDB?idIMDB=${filmId}&token=${token1}&format=json&language=en-us&trailers=1`
     );
   }
 }
