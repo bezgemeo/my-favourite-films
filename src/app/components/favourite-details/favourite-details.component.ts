@@ -15,7 +15,7 @@ export class FavouriteDetailsComponent implements OnInit {
   @Input()
   public watched = false;
   @Input()
-  public dateToWatch = '';
+  public dateToWatch = null;
   @Input()
   public remember = false;
   @Input()

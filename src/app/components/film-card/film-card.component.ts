@@ -12,7 +12,7 @@ export class FilmCardComponent implements OnInit {
   @Input()
   public poster?: string;
   @Input()
-  public title?: string;
+  public title = '';
   @Input()
   public year?: string;
   @Input()
