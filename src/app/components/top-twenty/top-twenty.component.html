@@ -11,4 +11,5 @@
       [trailerQualitiesList]="film.trailers"
     ></app-film-card>
   </div>
+  <div [ngClass]="!loading ? 'hidden' : ''" class="site-preloader"></div>
 </div>

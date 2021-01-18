@@ -10,6 +10,7 @@ import {TrailerService} from '../../services/trailer.service';
 })
 export class TopTwentyComponent {
   public topFilmsList?: IFilm[];
+  public loading = false;
 
   constructor(public filmService: FilmService,
               public trailerService: TrailerService) {
@@ -17,6 +18,7 @@ export class TopTwentyComponent {
   }
 
   getTop20Films(): void {
+    this.loading = true;
     this.filmService.getFilms().subscribe(
       response => {
         const movies = response.data.movies; // objects array. idIMDB is film ID
@@ -29,6 +31,7 @@ export class TopTwentyComponent {
               }).trailers = trailersResponse.data.movies[0].trailer.qualities;
               if (i === arr.length - 1) {
                 this.topFilmsList = movies;
+                this.loading = false;
               }
             });
         });
@@ -37,6 +40,7 @@ export class TopTwentyComponent {
         this.filmService.getLocalFilms().subscribe(
           response => {
             this.topFilmsList = response.data.movies;
+            this.loading = false;
           }
         );
       });
