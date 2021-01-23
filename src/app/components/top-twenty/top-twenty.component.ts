@@ -24,14 +24,17 @@ export class TopTwentyComponent {
         const movies = response.data.movies; // objects array. idIMDB is film ID
 
         if (movies[0].trailers) {
+          console.log('local');
           this.topFilmsList = movies;
           this.loading = false;
         } else {
-          movies.forEach((movie: IFilm, i: number, arr: []) => {
+          console.log('remote');
+          movies.forEach((movie: IFilm, i: number, arr: IFilm[]) => {
             const id = movie.idIMDB;
             this.trailerService.getTrailer(id).subscribe(
               trailersResponse => {
-                movies.find((item: any) => {
+                // @ts-ignore
+                movies.find((item: IFilm) => {
                   return item.idIMDB === trailersResponse.data.movies[0].idIMDB;
                 }).trailers = trailersResponse.data.movies[0].trailer.qualities;
                 if (i === arr.length - 1) {
@@ -41,7 +44,8 @@ export class TopTwentyComponent {
               });
           });
         }
-      }, error => {
+      },
+      error => {
         throw new Error(`ooops, something is wrong, ${error}`);
       });
   }
