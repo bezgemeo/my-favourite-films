@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {GeneralListComponent} from './components/general-list/general-list.component';
 import {TopTwentyComponent} from './components/top-twenty/top-twenty.component';
+import {FavouriteFilmsComponent} from './components/favourite-films/favourite-films.component';
+import {NotFoundComponent} from './components/not-found/not-found.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/general-list'},
   {path: 'general-list', component: GeneralListComponent},
   {path: 'top-20', component: TopTwentyComponent},
+  {path: 'favourites', component: FavouriteFilmsComponent},
+  {path: '**', component: NotFoundComponent},
 ];
 
 @NgModule({

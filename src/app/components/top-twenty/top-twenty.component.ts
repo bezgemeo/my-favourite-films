@@ -1,25 +1,37 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IFilm} from '../../interfaces/film-interface';
 import {FilmService} from '../../services/film.service';
 import {TrailerService} from '../../services/trailer.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-top-twenty',
   templateUrl: './top-twenty.component.html',
   styleUrls: ['./top-twenty.component.scss']
 })
-export class TopTwentyComponent {
+export class TopTwentyComponent implements OnInit, OnDestroy {
   public topFilmsList?: IFilm[];
   public loading = false;
+  private subscription: Subscription | undefined;
 
   constructor(public filmService: FilmService,
               public trailerService: TrailerService) {
+  }
+
+  ngOnInit(): void {
     this.getTop20Films();
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      console.log(this.subscription);
+      this.subscription.unsubscribe();
+    }
   }
 
   getTop20Films(): void {
     this.loading = true;
-    this.filmService.getFilms().subscribe(
+    this.subscription = this.filmService.getFilms().subscribe(
       response => {
         const movies = response.data.movies; // objects array. idIMDB is film ID
 

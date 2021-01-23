@@ -10,6 +10,8 @@ import {GeneralListComponent} from './components/general-list/general-list.compo
 import {TopTwentyComponent} from './components/top-twenty/top-twenty.component';
 import {ModalWindowComponent} from './components/modal-window/modal-window.component';
 import {FavouriteDetailsComponent} from './components/favourite-details/favourite-details.component';
+import { FavouriteFilmsComponent } from './components/favourite-films/favourite-films.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import {FavouriteDetailsComponent} from './components/favourite-details/favourit
     GeneralListComponent,
     TopTwentyComponent,
     ModalWindowComponent,
-    FavouriteDetailsComponent
+    FavouriteDetailsComponent,
+    FavouriteFilmsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
