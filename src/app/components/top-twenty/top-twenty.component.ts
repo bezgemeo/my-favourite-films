@@ -22,27 +22,27 @@ export class TopTwentyComponent {
     this.filmService.getFilms().subscribe(
       response => {
         const movies = response.data.movies; // objects array. idIMDB is film ID
-        movies.forEach((movie: IFilm, i: number, arr: []) => {
-          const id = movie.idIMDB;
-          this.trailerService.getTrailer(id).subscribe(
-            trailersResponse => {
-              movies.find((item: any) => {
-                return item.idIMDB === trailersResponse.data.movies[0].idIMDB;
-              }).trailers = trailersResponse.data.movies[0].trailer.qualities;
-              if (i === arr.length - 1) {
-                this.topFilmsList = movies;
-                this.loading = false;
-              }
-            });
-        });
+
+        if (movies[0].trailers) {
+          this.topFilmsList = movies;
+          this.loading = false;
+        } else {
+          movies.forEach((movie: IFilm, i: number, arr: []) => {
+            const id = movie.idIMDB;
+            this.trailerService.getTrailer(id).subscribe(
+              trailersResponse => {
+                movies.find((item: any) => {
+                  return item.idIMDB === trailersResponse.data.movies[0].idIMDB;
+                }).trailers = trailersResponse.data.movies[0].trailer.qualities;
+                if (i === arr.length - 1) {
+                  this.topFilmsList = movies;
+                  this.loading = false;
+                }
+              });
+          });
+        }
       }, error => {
-        console.log('\n%cConnection with Remote Host Error! Working from local JSON file\n', 'color: lightGreen', error);
-        this.filmService.getLocalFilms().subscribe(
-          response => {
-            this.topFilmsList = response.data.movies;
-            this.loading = false;
-          }
-        );
+        throw new Error(`ooops, something is wrong, ${error}`);
       });
   }
 }

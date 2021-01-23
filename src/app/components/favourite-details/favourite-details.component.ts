@@ -39,8 +39,6 @@ export class FavouriteDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.fillForm();
-    // this.setValidatorToInputData();
-
   }
 
   public sendData(): void {
