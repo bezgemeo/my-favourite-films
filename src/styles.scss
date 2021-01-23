@@ -1,3 +1,15 @@
+:root {
+  --white: #fff;
+  --main-bg-color: #e1f5fe;
+  --main-text-color: #263238;
+  --green: #8bc34a;
+  --orange: #ff5722;
+  --blue: #29b6f6;
+  --dark-blue: #01579b;
+  --dark-blue-hover: #0d47a1;
+  --normal-transiton: .3s;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +18,8 @@
 }
 
 body {
-  color: #000;
+  color: var(--main-text-color);
+  background-color: var(--main-bg-color);
   font-size: 16px;
 }
 
@@ -24,17 +37,17 @@ nav {
 
 a {
   text-decoration: none;
-  color: #29cf72;
+  color: var(--blue);
   display: inline-block;
   margin-left: 10px;
-  transition: color .3s;
+  transition: color var(--normal-transiton);
 
   &:first-child {
     margin-left: 0;
   }
 
   &:hover {
-    color: darken(#29cf72, 10%);
+    color: var(--green);
   }
 }
 
@@ -85,6 +98,21 @@ a {
     &:hover {
       border-color: darken(lightgreen, 20%);
       background-color: darken(lightgreen, 20%);
+    }
+  }
+
+  &-primary {
+    border-color: lightblue;
+    background-color: lightblue;
+
+    &[disabled]{
+      background-color: rgba(lightblue, .5);
+      color: black;
+    }
+
+    &:hover {
+      background-color: darken(lightblue, 10%);
+      border-color: darken(lightblue, 10%);
     }
   }
 }

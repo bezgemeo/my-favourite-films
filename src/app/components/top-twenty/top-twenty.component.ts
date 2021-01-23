@@ -24,7 +24,6 @@ export class TopTwentyComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.subscription) {
-      console.log(this.subscription);
       this.subscription.unsubscribe();
     }
   }

@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {UserFavouritesService} from '../../services/user-favourites.service';
 
 @Component({
   selector: 'app-film-card',
@@ -26,6 +27,8 @@ export class FilmCardComponent implements OnInit {
   public trailerQualitiesList?: any;
   public chosenQuality?: string;
 
+  public localId = '';
+
   public addedToFavourite = false;
 
   public trailerModalShown = false;
@@ -35,12 +38,16 @@ export class FilmCardComponent implements OnInit {
   public remember = false;
   public review = '';
 
-  constructor() {
+  public message = '';
+
+  constructor(private userFav: UserFavouritesService) {
   }
 
   ngOnInit(): void {
+    this.localId = `favourite_${this.idIMDB}`;
     this.addedToFavourite = this.checkFavourite();
     this.fillFromStorage();
+    this.userFav.sharedQuantity.subscribe(quantity => quantity);
   }
 
   public showForm(): void {
@@ -49,15 +56,20 @@ export class FilmCardComponent implements OnInit {
 
   public editFavourite(event: Event): void {
     const LS = window.localStorage;
-    LS.setItem(this.idIMDB, JSON.stringify(event) as string);
+    LS.setItem(this.localId, JSON.stringify(event) as string);
     this.fillFromStorage();
     this.addedToFavourite = true;
     this.favouriteModalShown = false;
+    this.updateFavouriteFilmsQuantity();
+  }
+
+  public updateFavouriteFilmsQuantity(): void {
+    this.userFav.nextQuantity(this.userFav.getUserFavouriteFilms().toString());
   }
 
   public fillFromStorage(): void {
     if (this.checkFavourite()) {
-      const data = JSON.parse(window.localStorage.getItem(this.idIMDB) as string);
+      const data = JSON.parse(window.localStorage.getItem(this.localId) as string);
       this.watched = data.watched;
       this.dateToWatch = data.dateToWatch;
       this.remember = data.remember;
@@ -66,7 +78,7 @@ export class FilmCardComponent implements OnInit {
   }
 
   public checkFavourite(): boolean {
-    return !!window.localStorage.getItem(this.idIMDB);
+    return !!window.localStorage.getItem(this.localId);
   }
 
   public openModalWithTrailer(): void {

@@ -27,7 +27,7 @@
     <div class="film-info-trailer" *ngIf="trailerQualitiesList">
       <span>Watch trailer</span>
       <button *ngFor="let trailer of trailerQualitiesList; let $index = index"
-                  class="button"
+                  class="button button-primary"
                   (click)="chooseQuality(trailerQualitiesList[$index].videoURL)"
       >
         {{trailer.quality.toString()}}
@@ -35,11 +35,12 @@
     </div>
     <div class="film-info-favourite">
       <button
-        [classList]="addedToFavourite ? 'button button-success' : 'button button-alert'"
+        [classList]="addedToFavourite ? 'button button-success' : 'button button-primary'"
         (click)="showForm();"
       >
         {{addedToFavourite ? 'Your favourite' : 'Add to favourites'}}
       </button>
+      <button class="button button-alert">Remove from favourites</button>
     </div>
   </div>
 </div>

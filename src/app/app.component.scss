@@ -2,12 +2,26 @@ h1 {
   padding-top: 30px;
 }
 
-.current {
-  color: tomato;
-  transition: color .3s;
+a {
+  display: inline-block;
+  padding: 20px 30px;
+  border-radius: 4px;
+  color: var(--main-text-color);
+  background-color: var(--white);
+  transition: background-color var(--normal-transiton);
 
   &:hover {
-    color: darken(tomato, 25%);
+    background-color: var(--blue);
+    color: var(--white);
+  }
+
+  &.current{
+    background-color: var(--dark-blue);
+    color: var(--white);
+
+    &:hover{
+      background-color: var(--blue);
+    }
   }
 }
 
