@@ -1,7 +1,7 @@
 .intro {
   background-color: var(--white);
   padding: 40px;
-  border-radius: 8px;
+  border-radius: var(--border-radius-normal);
   text-align: center;
 
   p {

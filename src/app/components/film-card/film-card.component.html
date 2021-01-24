@@ -15,7 +15,7 @@
       </span>
     </p>
     <p class="film-info__links">
-      Directors:
+      {{directors.length > 1 ? 'Directors' : 'Director'}}:
       <ng-container *ngFor="let director of directors; let $index = last;">
         <a href="https://www.imdb.com/name/{{director.id}}/"
            rel="noopener noreferrer"
@@ -30,17 +30,23 @@
                   class="button button-primary"
                   (click)="chooseQuality(trailerQualitiesList[$index].videoURL)"
       >
-        {{trailer.quality.toString()}}
+        {{trailer.quality}}
       </button>
     </div>
     <div class="film-info-favourite">
       <button
         [classList]="addedToFavourite ? 'button button-success' : 'button button-primary'"
-        (click)="showForm();"
+        (click)="showForm()"
       >
         {{addedToFavourite ? 'Your favourite' : 'Add to favourites'}}
       </button>
-      <button class="button button-alert">Remove from favourites</button>
+      <button
+        *ngIf="addedToFavourite"
+        class="button button-secondary"
+        (click)="showRemoveConfirm()"
+      >
+        Remove from favourites
+      </button>
     </div>
   </div>
 </div>
@@ -64,7 +70,6 @@
 
 <ng-template #favouriteContent>
   <app-favourite-details
-    *ngIf="favouriteModalShown"
     [filmID]="idIMDB"
     [incomingFilmName]="title"
     [watched]="watched"
@@ -74,4 +79,17 @@
     [addedToFav]="addedToFavourite"
     (submitForm)="editFavourite($event)"
   ></app-favourite-details>
+</ng-template>
+
+<app-modal-window [modalShown]="removeModalShown">
+  <ng-container [ngTemplateOutlet]="removeFromFavContent"></ng-container>
+</app-modal-window>
+
+<ng-template #removeFromFavContent>
+  <app-remove-from-fav
+    [filmName]="title"
+    [shown]="removeModalShown"
+    (goBack)="removeModalShown = false"
+    (remove)="removeFromFavourites()"
+  ></app-remove-from-fav>
 </ng-template>

@@ -13,6 +13,7 @@ import {FavouriteDetailsComponent} from './components/favourite-details/favourit
 import {FavouriteFilmsComponent} from './components/favourite-films/favourite-films.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {BadgeComponent} from './components/badge/badge.component';
+import { RemoveFromFavComponent } from './components/remove-from-fav/remove-from-fav.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {BadgeComponent} from './components/badge/badge.component';
     FavouriteDetailsComponent,
     FavouriteFilmsComponent,
     NotFoundComponent,
-    BadgeComponent
+    BadgeComponent,
+    RemoveFromFavComponent
   ],
   imports: [
     BrowserModule,

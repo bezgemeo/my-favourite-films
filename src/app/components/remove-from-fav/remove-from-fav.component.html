@@ -1,0 +1,22 @@
+<div class="remove-wrapper">
+  <h3>
+      You are going to remove <strong>"{{filmName}}"</strong> from your favourite films!
+  </h3>
+
+  <p>Are you sure?</p>
+
+  <div class="remove-buttons">
+    <button
+      (click)="removeFav()"
+      class="button button-alert"
+    >
+      Yes
+    </button>
+    <button
+      (click)="closeModal()"
+      class="button button-secondary"
+    >
+      Go back
+    </button>
+  </div>
+</div>

@@ -33,12 +33,11 @@ export class FilmCardComponent implements OnInit {
 
   public trailerModalShown = false;
   public favouriteModalShown = false;
+  public removeModalShown = false;
   public watched = false;
   public dateToWatch = null;
   public remember = false;
   public review = '';
-
-  public message = '';
 
   constructor(private userFav: UserFavouritesService) {
   }
@@ -61,6 +60,20 @@ export class FilmCardComponent implements OnInit {
     this.addedToFavourite = true;
     this.favouriteModalShown = false;
     this.updateFavouriteFilmsQuantity();
+  }
+
+  public removeFromFavourites(): void {
+    const LS = window.localStorage;
+    LS.removeItem(this.localId);
+    this.addedToFavourite = false;
+    this.removeModalShown = false;
+    // todo: fix form population on removing from favourites
+    // this.fillFromStorage();
+    this.updateFavouriteFilmsQuantity();
+  }
+
+  public showRemoveConfirm(): void {
+    this.removeModalShown = true;
   }
 
   public updateFavouriteFilmsQuantity(): void {

@@ -1,0 +1,33 @@
+.remove {
+  &-wrapper {
+    background-color: var(--white);
+    min-width: 400px;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    border-radius: var(--border-radius-normal);
+    text-align: center;
+
+    h3 {
+      margin-bottom: 40px;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    strong {
+      color: var(--orange);
+    }
+  }
+
+  &-buttons {
+    button {
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

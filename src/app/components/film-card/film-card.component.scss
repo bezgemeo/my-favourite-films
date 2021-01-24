@@ -3,8 +3,8 @@
     display: flex;
     padding: 20px;
     margin-bottom: 20px;
-    background-color: lightgoldenrodyellow;
-    border-radius: 8px;
+    background-color: var(--white);
+    border-radius: var(--border-radius-normal);
   }
 
   &-poster {
@@ -26,12 +26,11 @@
     }
 
     &__links a {
-      color: tomato;
-      transition: color .3s;
+      color: var(--orange);
       margin-left: 0;
 
       &:hover {
-        color: darken(tomato, 30%);
+        text-decoration: underline;
       }
     }
 
